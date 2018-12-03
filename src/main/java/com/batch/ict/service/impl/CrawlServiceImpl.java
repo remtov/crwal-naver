@@ -26,7 +26,7 @@ public class CrawlServiceImpl implements CrawlService {
 	private String targetUrl;
 	@Value("${ex.parent.selector}")
 	private String pSelector;
-	@Value("${ex.dt.selector}")
+	@Value("${ex.dt.selector}") 
 	private String dtSelector;
 	
 	@Autowired
@@ -40,18 +40,10 @@ public class CrawlServiceImpl implements CrawlService {
 		List<NaverITNews> nitnList = new ArrayList<NaverITNews>();
 		for(Element aElement : aElements) {
 			String uri = aElement.attr("href");
-			int sIdx = uri.indexOf("aid=");
-			String aid = uri.substring(sIdx) + "&abc";
-			if(aid.indexOf("&")!=-1) {
-				aid = aid.substring(0,aid.indexOf("&"));
-			}
-			aid = aid.replace("aid=","");
-			if(nitnRepo.findByAId(aid).size()!=0) {
-				continue;
-			}
+	
 			String title = aElement.text();
 			NaverITNews nitn = new NaverITNews();
-			nitn.setAid(aid);
+
 			nitn.setUri(uri);
 			nitn.setTitle(title);
 			nitnList.add(nitn);

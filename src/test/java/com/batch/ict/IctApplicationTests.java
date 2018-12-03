@@ -56,7 +56,7 @@ public class IctApplicationTests {
 			aid = aid.replace("aid=","");
 			String title = aElement.text();
 			NaverITNews nitn = new NaverITNews();
-			nitn.setAid(aid);
+
 			nitn.setUri(uri);
 			nitn.setTitle(title);
 			nitnList.add(nitn);
