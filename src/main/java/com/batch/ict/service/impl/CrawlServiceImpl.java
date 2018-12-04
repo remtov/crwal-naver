@@ -16,19 +16,16 @@ import com.batch.ict.collection.NaverITNews;
 import com.batch.ict.repository.NaverITNewsRepository;
 import com.batch.ict.service.CrawlService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class CrawlServiceImpl implements CrawlService {
 
 	@Value("${ex.target.url}")
 	private String targetUrl;
 	@Value("${ex.parent.selector}")
 	private String pSelector;
-	@Value("${ex.dt.selector}") 
+	@Value("${ex.dt.selector}")
 	private String dtSelector;
-	
+
 	@Autowired
 	private NaverITNewsRepository nitnRepo;
 	
@@ -38,9 +35,9 @@ public class CrawlServiceImpl implements CrawlService {
 		Elements ulElements = doc.select(pSelector);
 		Elements aElements = ulElements.select(dtSelector);
 		List<NaverITNews> nitnList = new ArrayList<NaverITNews>();
-		for(Element aElement : aElements) {
+		for (Element aElement : aElements) {
 			String uri = aElement.attr("href");
-	
+
 			String title = aElement.text();
 			NaverITNews nitn = new NaverITNews();
 
